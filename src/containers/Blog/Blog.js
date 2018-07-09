@@ -32,10 +32,14 @@ class Blog extends Component {
                 {/*<Route path="/" exact render={ () => <h1>Home</h1> } />
                 <Route path="/" render={ () => <h1>Home2</h1> } />*/}
                 {/* this.props.match.url is used to build relative path*/}
-                
+
                 <Route path="/"  exact  component ={Posts} />
-                <Route path="/new-post" component ={NewPost}/>
-                <Route path="/:id" component ={FullPost}/>
+
+                {/* Switch allow to execute only one router at a time*/}
+                <Switch> 
+                    <Route path="/new-post" component ={NewPost}/>
+                    <Route path="/:id" component ={FullPost}/>
+                </Switch>
                 <Route path="/contact"  exact  render={ ()=> <h2>1001, New Zealand</h2> }/>
                 
                 {/*
