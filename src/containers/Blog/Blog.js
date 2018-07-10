@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Blog.css';
 import Posts from '../Posts/Posts';
-import {Route, NavLink, Switch} from 'react-router-dom';
+import {Route, NavLink, Switch, Redirect} from 'react-router-dom';
 import NewPost from '../NewPost/NewPost';
 import FullPost from '../FullPost/FullPost';
 
@@ -16,14 +16,14 @@ class Blog extends Component {
                 <ul>
                     {/* activeClassName="active" is used to set custom hyper link active class */}
                     
-                    <li><NavLink to="/" exact activeClassName="active" >Home</NavLink></li>
+                    <li><NavLink to="/posts" exact activeClassName="active" >Home</NavLink></li>
                     
                     <li><NavLink to={{
                         pathname: '/new-post',
                         hash: '#submit',
                         search: '?quick-submit=true'
                     }}>New Post</NavLink></li>
-
+                    <li><NavLink to="/about">About Us</NavLink></li>
                     <li><NavLink to="/contact">Contact Us</NavLink></li>
                 </ul>
             </nav>
@@ -33,12 +33,13 @@ class Blog extends Component {
                 <Route path="/" render={ () => <h1>Home2</h1> } />*/}
                 {/* this.props.match.url is used to build relative path*/}
 
-                <Route path="/"  exact  component ={Posts} />
 
                 {/* Switch allow to execute only one router at a time*/}
                 <Switch> 
+                    <Route path="/about"  exact  render={ ()=> <h2>React developer community</h2> }/>    
                     <Route path="/new-post" component ={NewPost}/>
-                    <Route path="/:id" component ={FullPost}/>
+                    <Route path="/posts"  component ={Posts} />
+                    <Redirect from="/" to="/posts" />
                 </Switch>
                 <Route path="/contact"  exact  render={ ()=> <h2>1001, New Zealand</h2> }/>
                 
