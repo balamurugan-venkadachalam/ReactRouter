@@ -2,8 +2,14 @@ import React, { Component } from 'react';
 import './Blog.css';
 import Posts from '../Posts/Posts';
 import {Route, NavLink, Switch, Redirect} from 'react-router-dom';
-import NewPost from '../NewPost/NewPost';
 import FullPost from '../FullPost/FullPost';
+//import NewPost from '../NewPost/NewPost';
+import asyncComponent from '../../hoc/asyncComponent';
+
+// Component lazy loading 
+const AsyncNewPost = asyncComponent(() => {
+    return import('../NewPost/NewPost');
+});
 
 class Blog extends Component {
  
@@ -37,7 +43,7 @@ class Blog extends Component {
                 {/* Switch allow to execute only one router at a time*/}
                 <Switch> 
                     <Route path="/about"  exact  render={ ()=> <h2>React developer community</h2> }/>    
-                    <Route path="/new-post" component ={NewPost}/>
+                    <Route path="/new-post" component ={AsyncNewPost}/>
                     <Route path="/posts"  component ={Posts} />
                     <Redirect from="/" to="/posts" />
                 </Switch>
